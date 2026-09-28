@@ -10,6 +10,26 @@
   const esc = s => String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   const qkey = q => `${q.exam}|${q.subject}|${q.question}`;
   const answerText = a => a || '';
+  // GitHub에 파일명이 CP949 방식으로 깨져 올라간 경우를 위한 최소 호환 처리.
+  const mojibakePath = path => {
+    try {
+      return new TextDecoder('euc-kr').decode(new TextEncoder().encode(path));
+    } catch {
+      return path;
+    }
+  };
+  const bindImageFallback = img => {
+    if (!img) return;
+    img.addEventListener('error', () => {
+      const fallback = mojibakePath(img.dataset.originalPath || img.getAttribute('src') || '');
+      if (fallback && fallback !== img.getAttribute('src')) {
+        img.dataset.originalPath = img.dataset.originalPath || img.getAttribute('src');
+        img.src = fallback;
+      } else {
+        img.classList.add('image-missing');
+      }
+    }, {once:false});
+  };
   function toast(s){toastEl.textContent=s;toastEl.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>toastEl.classList.remove('show'),1800)}
   function go(page){state.page=page;location.hash=page;render()}
   document.addEventListener('click',e=>{const b=e.target.closest('[data-page]');if(b){e.preventDefault();go(b.dataset.page)}});
@@ -51,7 +71,7 @@
     app.innerHTML=`<section class="solve"><div class="solve-head"><div><div class="eyebrow">${examLabel(state.exam)}</div><div class="solve-title">${state.subject==='전체'?'전체 시험':q.subject} · ${q.question}번</div></div><button class="btn" id="backExam">시험 목록</button></div>
       <div class="tabs">${['전체',...subjectsForExam(state.exam)].map(s=>`<button class="tab ${s===state.subject?'active':''}" data-subject="${esc(s)}">${s}</button>`).join('')}</div>
       ${state.subject==='전체'?`<div class="toolbar"><span class="q-meta">전체 시험 모드 · 공통 22문항 + ${selected} 8문항</span><select id="choiceSelect"><option ${selected==='확률과 통계'?'selected':''}>확률과 통계</option><option ${selected==='미적분'?'selected':''}>미적분</option><option ${selected==='기하'?'selected':''}>기하</option></select></div>`:''}
-      <div class="problem-wrap"><img class="problem-img" src="./${q.path}" alt="${esc(examLabel(q.exam))} ${esc(q.subject)} ${q.question}번 문제"></div>
+      <div class="problem-wrap"><img class="problem-img" data-original-path="./${q.path}" src="./${q.path}" alt="${esc(examLabel(q.exam))} ${esc(q.subject)} ${q.question}번 문제"></div>
       <div class="answer-box"><div class="q-meta">${q.score}점 · ${q.answer&&/^[①②③④⑤]$/.test(q.answer)?'5지선다형':'단답형'}</div><div style="height:10px"></div>
         ${/^[①②③④⑤]$/.test(q.answer)?`<div class="choices">${['①','②','③','④','⑤'].map(c=>`<button class="btn choice" data-choice="${c}">${c}</button>`).join('')}</div>`:`<div class="num-answer"><input id="numericAnswer" inputmode="numeric" placeholder="답 입력"><button class="btn primary" id="submitNum">제출</button></div>`}
         <div id="result"></div>
@@ -59,6 +79,7 @@
       <div id="solutionArea"></div>
       <div class="nav-row"><button class="btn" id="prev" ${idx===0?'disabled':''}>← 이전</button><span class="q-meta">${idx+1} / ${qs.length}</span><button class="btn" id="next" ${idx===qs.length-1?'disabled':''}>다음 →</button></div>
     </section>`;
+    bindImageFallback(document.querySelector('.problem-img'));
     document.getElementById('backExam').onclick=()=>go('exams');
     document.querySelectorAll('[data-subject]').forEach(b=>b.onclick=()=>{state.subject=b.dataset.subject;state.index=0;render()});
     document.getElementById('choiceSelect')?.addEventListener('change',e=>{state.selectedChoice=e.target.value;state.index=22;render()});
@@ -74,7 +95,8 @@
   }
   function showResult(correct,q,sol,existing=false){
     const r=document.getElementById('result');r.className=`result ${correct?'correct':'wrong'}`;r.innerHTML=correct?`<b>정답입니다.</b> 답: ${esc(q.answer)}`:`<b>오답입니다.</b> 정답: ${esc(q.answer)}`;
-    const area=document.getElementById('solutionArea');area.innerHTML=`<div class="solution"><h3>해설</h3><img src="./${sol.path}" alt="${esc(q.question)}번 해설"></div>`;
+    const area=document.getElementById('solutionArea');area.innerHTML=`<div class="solution"><h3>해설</h3><img class="solution-img" data-original-path="./${sol.path}" src="./${sol.path}" alt="${esc(q.question)}번 해설"></div>`;
+    bindImageFallback(area.querySelector('.solution-img'));
   }
   function bank(){
     const params=new URLSearchParams(location.hash.split('?')[1]||'');
