@@ -1,42 +1,72 @@
 [
   {
-    "id": "2027-09",
-    "label": "2027학년도 9월 모의평가",
-    "date": "2026-09-02",
-    "organizer": "한국교육과정평가원",
-    "scope": "수학Ⅰ·수학Ⅱ + 확률과 통계·미적분·기하",
-    "official": "https://www.ebsi.co.kr/ebs/xip/xipa/retrieveSCVPreparation.ebs?irecord=202609023&targetCd=D300"
-  },
-  {
-    "id": "2027-06",
-    "label": "2027학년도 6월 모의평가",
-    "date": "2026-06-04",
-    "organizer": "한국교육과정평가원",
-    "scope": "수학Ⅰ·수학Ⅱ + 확률과 통계·미적분·기하",
-    "official": "https://www.ebsi.co.kr/ebs/xip/xipa/retrieveSCVPreparation.ebs?irecord=202606043&targetCd=D300"
-  },
-  {
-    "id": "2026-09",
-    "label": "2026학년도 9월 모의평가",
-    "date": "2025-09-03",
-    "organizer": "한국교육과정평가원",
-    "scope": "수학Ⅰ·수학Ⅱ + 확률과 통계·미적분·기하",
-    "official": "https://www.ebsi.co.kr/ebs/xip/xipc/previousPaperList.ebs?targetCd=D300"
-  },
-  {
-    "id": "2026-06",
+    "id": "2506",
     "label": "2026학년도 6월 모의평가",
     "date": "2025-06-04",
+    "academicYear": "2026학",
+    "calendarYear": 2025,
+    "month": "06",
+    "count": 22,
     "organizer": "한국교육과정평가원",
-    "scope": "수학Ⅰ·수학Ⅱ + 확률과 통계·미적분·기하",
-    "official": "https://www.ebsi.co.kr/ebs/xip/xipc/previousPaperList.ebs?targetCd=D300"
+    "scope": "공통 수학Ⅰ·수학Ⅱ 22문항",
+    "official": "https://www.ebsi.co.kr/ebs/xip/xipc/previousPaperList.ebs?targetCd=D300",
+    "problemFilename": "math_mun_2506.pdf",
+    "solutionFilename": "math_hsj_2506.pdf"
   },
   {
-    "id": "2026-suneung",
+    "id": "2509",
+    "label": "2026학년도 9월 모의평가",
+    "date": "2025-09-03",
+    "academicYear": "2026학",
+    "calendarYear": 2025,
+    "month": "09",
+    "count": 22,
+    "organizer": "한국교육과정평가원",
+    "scope": "공통 수학Ⅰ·수학Ⅱ 22문항",
+    "official": "https://www.ebsi.co.kr/ebs/xip/xipc/previousPaperList.ebs?targetCd=D300",
+    "problemFilename": "math_mun_2509.pdf",
+    "solutionFilename": "math_hsj_2509.pdf"
+  },
+  {
+    "id": "2511",
     "label": "2026학년도 대학수학능력시험",
     "date": "2025-11-13",
+    "academicYear": "2026학",
+    "calendarYear": 2025,
+    "month": "11",
+    "count": 22,
     "organizer": "한국교육과정평가원",
-    "scope": "수학Ⅰ·수학Ⅱ + 확률과 통계·미적분·기하",
-    "official": "https://www.ebsi.co.kr/ebs/xip/xipc/previousPaperList.ebs?targetCd=D300"
+    "scope": "공통 수학Ⅰ·수학Ⅱ 22문항",
+    "official": "https://www.ebsi.co.kr/ebs/xip/xipc/previousPaperList.ebs?targetCd=D300",
+    "problemFilename": "math_mun_2511.pdf",
+    "solutionFilename": "math_hsj_2511.pdf"
+  },
+  {
+    "id": "2606",
+    "label": "2027학년도 6월 모의평가",
+    "date": "2026-06-04",
+    "academicYear": "2027학",
+    "calendarYear": 2026,
+    "month": "06",
+    "count": 22,
+    "organizer": "한국교육과정평가원",
+    "scope": "공통 수학Ⅰ·수학Ⅱ 22문항",
+    "official": "https://www.ebsi.co.kr/ebs/xip/xipc/previousPaperList.ebs?targetCd=D300",
+    "problemFilename": "math_mun_2606.pdf",
+    "solutionFilename": "math_hsj_2606.pdf"
+  },
+  {
+    "id": "2609",
+    "label": "2027학년도 9월 모의평가",
+    "date": "2026-09-02",
+    "academicYear": "2027학",
+    "calendarYear": 2026,
+    "month": "09",
+    "count": 22,
+    "organizer": "한국교육과정평가원",
+    "scope": "공통 수학Ⅰ·수학Ⅱ 22문항",
+    "official": "https://www.ebsi.co.kr/ebs/xip/xipc/previousPaperList.ebs?targetCd=D300",
+    "problemFilename": "math_mun_2609.pdf",
+    "solutionFilename": "math_hsj_2609.pdf"
   }
 ]
